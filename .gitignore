@@ -1,1 +1,4 @@
 war/WEB-INF/classes/
+datanucleus*.jar
+jdo2-api-2.3-eb.jar
+war/WEB-INF/appengine-generated/
