@@ -29,4 +29,8 @@ public class ComentarioDao {
 	public void salvar(Comentario comentario) {
 		objectify.put(comentario);		
 	}
+	
+	public Comentario procurar(Long id) {
+		return objectify.find(Comentario.class, id);
+	}
 }

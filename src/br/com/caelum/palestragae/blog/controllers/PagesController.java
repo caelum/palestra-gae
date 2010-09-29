@@ -21,6 +21,8 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
+import com.google.appengine.api.labs.taskqueue.QueueFactory;
+import static com.google.appengine.api.labs.taskqueue.TaskOptions.Builder.*;
 import com.googlecode.objectify.Key;
 
 @Resource
@@ -60,22 +62,10 @@ public class PagesController {
 		comentario.setArtigo(new Key<Artigo>(Artigo.class, id));
 		comentarioDao.salvar(comentario);
 
-		enviarEmail(comentario, artigo);
+		QueueFactory.getDefaultQueue().add(url("/sendmail/"+artigo.getId()+"/"+comentario.getId()));
 
 		result.forwardTo(PagesController.class).show(id);
 	}
 
-	private void enviarEmail(Comentario comentario, Artigo artigo)
-			throws MessagingException, AddressException {
-		MimeMessage msg = new MimeMessage(Session
-				.getDefaultInstance(new Properties()));
-		msg.setFrom(new InternetAddress(
-				"pmatiello@gmail.com"));
-		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-				artigo.getEmailAutor()));
-		msg.setSubject("Comentario adicionado no artigo " + artigo.getTitulo());
-		msg.setText(comentario.getTexto());
-		Transport.send(msg);
-	}
 
 }
