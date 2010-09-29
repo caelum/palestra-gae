@@ -60,7 +60,7 @@ public class MailController {
 	}
 
 	@Post
-	@Path("/sendmail/{artigoid}/{comentarioid}")
+	@Path("/tasks/sendmail/{artigoid}/{comentarioid}")
 	public void enviarEmail(Long artigoid, Long comentarioid)
 			throws MessagingException, AddressException {
 		

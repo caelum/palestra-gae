@@ -6,14 +6,12 @@
 	<display-name>vraptor-blank-project</display-name>
 
 	<!--
-		VRaptor will scan classpath for all @Component and 
-		@Resource inside WEB-INF/classes
-
-		If you want to load them also from WEB-INF/lib/ jars, 
-		you need to specify from which packages they will
-		be loaded, comma separated:
+		VRaptor will scan classpath for all @Component and @Resource inside
+		WEB-INF/classes If you want to load them also from WEB-INF/lib/ jars,
+		you need to specify from which packages they will be loaded, comma
+		separated:
 	-->
-	
+
 
 	<context-param>
 		<param-name>br.com.caelum.vraptor.packages</param-name>
@@ -36,4 +34,13 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/tasks/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 </web-app>
