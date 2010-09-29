@@ -29,4 +29,8 @@ public class ArtigoDao {
 		objectify.put(artigo);
 	}
 
+	public Artigo find(Long id) {
+		return objectify.get(Artigo.class, id);
+	}
+
 }

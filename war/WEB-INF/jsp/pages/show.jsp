@@ -12,13 +12,8 @@
 <body>
 <h1>Blog</h1>
 
-<h2>Posts</h2>
+<h2>${artigo.titulo}</h2>
 
-<c:forEach items="${artigoList}" var="artigo">
-	<div>
-	<h3>${artigo.titulo}</h3>
-	<p>${artigo.texto}</p>
-	</div>
-</c:forEach>
+<p>${artigo.texto}</p>
 </body>
 </html>

@@ -9,17 +9,22 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 
 @Resource
-public class IndexController {
+public class PagesController {
 	
 	private final ArtigoDao artigoDao;
 
-	public IndexController(ArtigoDao artigoDao) {
+	public PagesController(ArtigoDao artigoDao) {
 		this.artigoDao = artigoDao;
 	}
 	
 	@Get @Path("/")
 	public List<Artigo> index() {
 		return artigoDao.todos();
+	}
+	
+	@Get @Path("/{id}")
+	public Artigo show(Long id) {
+		return artigoDao.find(id);
 	}
 
 }
