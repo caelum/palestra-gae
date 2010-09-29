@@ -6,7 +6,8 @@ public class Artigo {
 	
 	@Id
 	private Long id;
-	
+
+	private String emailAutor;
 	private String titulo;
 	private String texto;
 	
@@ -15,6 +16,12 @@ public class Artigo {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getEmailAutor() {
+		return emailAutor;
+	}
+	public void setEmailAutor(String emailAutor) {
+		this.emailAutor = emailAutor;
 	}
 	public String getTitulo() {
 		return titulo;

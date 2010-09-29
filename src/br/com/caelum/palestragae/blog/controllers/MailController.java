@@ -41,6 +41,7 @@ public class MailController {
 		Artigo artigo = new Artigo();
 		
 		artigo.setTitulo(message.getSubject());
+		artigo.setEmailAutor(message.getFrom()[0].toString());
 		Multipart multipart = (Multipart) message.getContent();
 		artigo.setTexto(multipart.getBodyPart(0).getContent().toString());
 		
