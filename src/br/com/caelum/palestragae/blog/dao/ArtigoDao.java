@@ -25,11 +25,11 @@ public class ArtigoDao {
 		return objectify.query(Artigo.class).list();
 	}
 
-	public void salva(Artigo artigo) {
+	public void salvar(Artigo artigo) {
 		objectify.put(artigo);
 	}
 
-	public Artigo find(Long id) {
+	public Artigo procurar(Long id) {
 		return objectify.get(Artigo.class, id);
 	}
 

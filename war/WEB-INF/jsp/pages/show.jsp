@@ -15,5 +15,17 @@
 <h2>${artigo.titulo}</h2>
 
 <p>${artigo.texto}</p>
+
+<c:forEach items="${comentarioList}" var="comentario">
+	<div>
+	<p>${comentario.texto}</p>
+	</div>
+</c:forEach>
+
+<form method="post" action="/${artigo.id}">
+	<input type="text" name="comentario.texto" />
+	<input type="submit" value="Comentar" />
+</form>
+
 </body>
 </html>

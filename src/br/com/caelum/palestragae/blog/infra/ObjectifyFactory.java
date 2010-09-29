@@ -1,4 +1,4 @@
-package br.com.caelum.palestragae.blog.dao;
+package br.com.caelum.palestragae.blog.infra;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;

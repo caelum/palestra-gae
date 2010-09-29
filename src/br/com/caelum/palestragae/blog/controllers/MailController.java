@@ -44,7 +44,7 @@ public class MailController {
 		Multipart multipart = (Multipart) message.getContent();
 		artigo.setTexto(multipart.getBodyPart(0).getContent().toString());
 		
-		artigoDao.salva(artigo);
+		artigoDao.salvar(artigo);
 		
 		result.use(status()).ok();
 	}
