@@ -1,7 +1,6 @@
 package br.com.caelum.palestragae.blog.controllers;
 
-import static com.google.appengine.api.labs.taskqueue.TaskOptions.Builder.url;
-
+import java.util.Arrays;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -17,7 +16,9 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
+import com.google.appengine.api.labs.taskqueue.Queue;
 import com.google.appengine.api.labs.taskqueue.QueueFactory;
+import com.google.appengine.api.labs.taskqueue.TaskOptions.Builder;
 import com.googlecode.objectify.Key;
 
 @Resource
@@ -34,15 +35,19 @@ public class PagesController {
 		this.comentarioDao = comentarioDao;
 	}
 
-	@Get
 	@Path("/")
 	public List<Artigo> index() {
+//		return Arrays.asList(
+//				new Artigo("Meu post", "pmatiello@gmail", "Post legal"),
+//				new Artigo("Meu post", "pmatiello@gmail", "Post legal"),
+//				new Artigo("Meu post", "pmatiello@gmail", "Post legal")
+//		);
 		return artigoDao.todos();
 	}
 
 	@Get
 	@Path("/{id}")
-	public void show(Long id) {
+	public void mostrar(Long id) {
 		Artigo artigo = artigoDao.procurar(id);
 		result.include("artigo", artigo);
 		result.include("comentarioList", comentarioDao.doArtigo(artigo));
@@ -52,14 +57,18 @@ public class PagesController {
 	@Path("/{id}")
 	public void comentar(Long id, Comentario comentario)
 			throws AddressException, MessagingException {
+
 		Artigo artigo = artigoDao.procurar(id);
 
 		comentario.setArtigo(new Key<Artigo>(Artigo.class, id));
 		comentarioDao.salvar(comentario);
 
-		QueueFactory.getDefaultQueue().add(url("/tasks/sendmail/"+artigo.getId()+"/"+comentario.getId()));
+		Queue queue = QueueFactory.getDefaultQueue();
+		queue.add(Builder.url("/tasks/sendmail/")
+				  .param("artigoid", artigo.getId().toString())
+				  .param("comentarioid", comentario.getId().toString()));
 
-		result.forwardTo(PagesController.class).show(id);
+		result.forwardTo(PagesController.class).mostrar(id);
 	}
 
 

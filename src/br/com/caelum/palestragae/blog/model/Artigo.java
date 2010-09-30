@@ -11,6 +11,14 @@ public class Artigo {
 	private String titulo;
 	private String texto;
 	
+	public Artigo() {
+	}
+	
+	public Artigo(String titulo, String emailAutor, String texto) {
+		this.titulo = titulo;
+		this.emailAutor = emailAutor;
+		this.texto = texto;
+	}
 	public Long getId() {
 		return id;
 	}

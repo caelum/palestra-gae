@@ -10,14 +10,13 @@
 <title>Palestra GAE - Blog</title>
 </head>
 <body>
-<h1>Blog</h1>
 
-<h2>Posts</h2>
+	<h1>Blog</h1>
+	<h2>Posts</h2>
+	
+	<c:forEach items="${artigoList}" var="artigo">
+		<a href="/${artigo.id}">${artigo.titulo}</a><br>
+	</c:forEach>
 
-<c:forEach items="${artigoList}" var="artigo">
-	<div>
-	<a href="/${artigo.id}">${artigo.titulo}</a>
-	</div>
-</c:forEach>
 </body>
 </html>
